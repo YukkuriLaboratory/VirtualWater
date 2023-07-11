@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "virtualpump",
+  "version": "${version}",
+  "name": "VirtualPump",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/YukkuriLaboratory/VirtualPump"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.yukulab.virtualpump.VirtualPump"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
