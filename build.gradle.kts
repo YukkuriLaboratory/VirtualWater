@@ -31,6 +31,11 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_version")
 }
 
+loom {
+    accessWidenerPath.set(file("src/main/resources/virtualpump.accesswidener"))
+    log4jConfigs.from(file("log4j2.xml"))
+}
+
 val targetJavaVersion = 17
 tasks {
     processResources {

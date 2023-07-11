@@ -15,6 +15,9 @@
       "net.yukulab.virtualpump.VirtualPump"
     ]
   },
+  "mixins": [
+    "virtualpump.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
