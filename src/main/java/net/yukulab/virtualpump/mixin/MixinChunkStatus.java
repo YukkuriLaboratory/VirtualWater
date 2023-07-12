@@ -38,5 +38,5 @@ public class MixinChunkStatus {
             return register(id, previous, taskMargin, shouldAlwaysUpgrade, heightMapTypes, chunkType, generationTask, loadTask);
         }
     }
-    */
+     */
 }
