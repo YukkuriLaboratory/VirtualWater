@@ -12,7 +12,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     container:
-      image: openjdk:17-jdk
+      image: eclipse-temurin:17-jdk
       options: --user root
 
     steps:
