@@ -10,17 +10,12 @@
   },
   "license": "MIT",
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "net.yukulab.virtualpump.VirtualPump"
-    ]
-  },
+  "entrypoints": {},
   "mixins": [
     "virtualpump.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
 }
