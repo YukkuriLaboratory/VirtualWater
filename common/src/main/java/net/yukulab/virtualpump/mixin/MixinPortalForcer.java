@@ -40,7 +40,11 @@ public abstract class MixinPortalForcer {
         arounds.forEach(
                 chunk -> chunk.forEachBlockMatchingPredicate(
                         blockState -> blockState != null && blockState.isAir(),
-                        (blockPos, blockState) -> chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false)
+                        (blockPos, blockState) -> {
+                            if (blockPos.getY() < 128) {
+                                chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
+                            }
+                        }
                 )
         );
     }

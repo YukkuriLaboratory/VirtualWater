@@ -2,6 +2,7 @@ package net.yukulab.virtualpump.mixin;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,11 +30,13 @@ public abstract class MixinChunkStatus {
         if (id.equals("light")) {
             return register(id, previous, taskMargin, shouldAlwaysUpgrade, heightMapTypes, chunkType, (chunkStatus, executor, world, chunkGenerator, structureTemplateManager, lightingProvider, fullChunkConverter, chunks, chunk) -> {
                 chunk.forEachBlockMatchingPredicate((state) -> state != null && state.isAir(), (blockPos, blockState) -> {
-                    chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
-                    var below = blockPos.down();
-                    var belowBlock = chunk.getBlockState(below);
-                    if (belowBlock != null && belowBlock.isOf(Blocks.LAVA)) {
-                        chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
+                    if (world.getRegistryKey() != World.NETHER || blockPos.getY() < 128) {
+                        chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
+                        var below = blockPos.down();
+                        var belowBlock = chunk.getBlockState(below);
+                        if (belowBlock != null && belowBlock.isOf(Blocks.LAVA)) {
+                            chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
+                        }
                     }
                 });
                 return generationTask.doWork(chunkStatus, executor, world, chunkGenerator, structureTemplateManager, lightingProvider, fullChunkConverter, chunks, chunk);
