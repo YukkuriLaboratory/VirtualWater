@@ -28,7 +28,7 @@ public abstract class MixinChunkStatus {
     private static ChunkStatus swapFull(String id, @Nullable ChunkStatus previous, int taskMargin, boolean shouldAlwaysUpgrade, EnumSet<Heightmap.Type> heightMapTypes, ChunkStatus.ChunkType chunkType, ChunkStatus.GenerationTask generationTask, ChunkStatus.LoadTask loadTask) {
         if (id.equals("light")) {
             return register(id, previous, taskMargin, shouldAlwaysUpgrade, heightMapTypes, chunkType, (chunkStatus, executor, world, chunkGenerator, structureTemplateManager, lightingProvider, fullChunkConverter, chunks, chunk) -> {
-                chunk.forEachBlockMatchingPredicate((state) -> state != null && state.getBlock() == Blocks.AIR, (blockPos, blockState) -> {
+                chunk.forEachBlockMatchingPredicate((state) -> state != null && state.isAir(), (blockPos, blockState) -> {
                     chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
                     var below = blockPos.down();
                     var belowBlock = chunk.getBlockState(below);
