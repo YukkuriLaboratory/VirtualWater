@@ -10,6 +10,5 @@ architectury {
 }
 
 loom {
-    accessWidenerPath.set(file("src/main/resources/virtualpump.accesswidener"))
     log4jConfigs.from(file("log4j2.xml"))
 }

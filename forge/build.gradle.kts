@@ -6,9 +6,10 @@ architectury {
     forge()
 }
 
+val commonProject = project(":common")
 loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
-    log4jConfigs.from(project(":common").loom.log4jConfigs.from)
+    accessWidenerPath.set(commonProject.loom.accessWidenerPath)
+    log4jConfigs.from(commonProject.loom.log4jConfigs.from)
 
     forge {
         convertAccessWideners.set(true)
@@ -53,6 +54,7 @@ tasks {
     }
 
     remapJar {
+        injectAccessWidener.set(true)
         inputFile.set(shadowJar.get().archiveFile.get())
         dependsOn(shadowJar)
         archiveClassifier.set(null as String?)
@@ -63,7 +65,7 @@ tasks {
     }
 
     sourcesJar {
-        val commonSources = project(":common").tasks.sourcesJar.get()
+        val commonSources = commonProject.tasks.sourcesJar.get()
         dependsOn(commonSources)
         from(commonSources.archiveFile.map { zipTree(it) })
     }

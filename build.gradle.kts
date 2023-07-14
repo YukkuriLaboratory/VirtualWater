@@ -19,9 +19,12 @@ architectury {
 subprojects {
     apply(plugin = "dev.architectury.loom")
 
-//    loom {
-//        silentMojangMappingsLicense()
-//    }
+    withGroovyBuilder {
+        "loom" {
+            "silentMojangMappingsLicense"()
+            setProperty("accessWidenerPath", file("src/main/resources/virtualpump.accesswidener"))
+        }
+    }
 
     dependencies {
         // To change the versions see the gradle.properties file
