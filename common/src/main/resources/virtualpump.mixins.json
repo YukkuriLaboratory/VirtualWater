@@ -8,7 +8,8 @@
   },
   "mixins": [
     "MixinChunkStatus",
-    "MixinEnderDragonFight"
+    "MixinEnderDragonFight",
+    "MixinPortalForcer"
   ],
   "client": [
     "client.MixinClientPlayerEntity"
