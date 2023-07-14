@@ -30,6 +30,11 @@ public abstract class MixinChunkStatus {
             return register(id, previous, taskMargin, shouldAlwaysUpgrade, heightMapTypes, chunkType, (chunkStatus, executor, world, chunkGenerator, structureTemplateManager, lightingProvider, fullChunkConverter, chunks, chunk) -> {
                 chunk.forEachBlockMatchingPredicate((state) -> state != null && state.getBlock() == Blocks.AIR, (blockPos, blockState) -> {
                     chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
+                    var below = blockPos.down();
+                    var belowBlock = chunk.getBlockState(below);
+                    if (belowBlock != null && belowBlock.isOf(Blocks.LAVA)) {
+                        chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
+                    }
                 });
                 return generationTask.doWork(chunkStatus, executor, world, chunkGenerator, structureTemplateManager, lightingProvider, fullChunkConverter, chunks, chunk);
             }, loadTask);
