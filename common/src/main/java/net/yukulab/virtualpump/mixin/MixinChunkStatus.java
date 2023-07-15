@@ -2,6 +2,8 @@ package net.yukulab.virtualpump.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Waterloggable;
+import net.minecraft.state.property.Properties;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
@@ -40,12 +42,11 @@ public abstract class MixinChunkStatus {
                             if (belowBlock.isOf(Blocks.LAVA)) {
                                 chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
                             }
-                            // Too laggy to play
-//                            while (belowBlock.getBlock() instanceof Waterloggable) {
-//                                chunk.setBlockState(below, belowBlock.with(Properties.WATERLOGGED, true), false);
-//                                below = below.down();
-//                                belowBlock = chunk.getBlockState(below);
-//                            }
+                            while (belowBlock.getBlock() instanceof Waterloggable) {
+                                chunk.setBlockState(below, belowBlock.with(Properties.WATERLOGGED, true), false);
+                                below = below.down();
+                                belowBlock = chunk.getBlockState(below);
+                            }
                         }
                     }
                 });
