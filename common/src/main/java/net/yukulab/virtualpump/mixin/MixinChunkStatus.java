@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.EnumSet;
-import java.util.List;
 
 @Mixin(ChunkStatus.class)
 public abstract class MixinChunkStatus {
@@ -51,6 +50,6 @@ public abstract class MixinChunkStatus {
 
     @Unique
     private static boolean virtualpump$isReplaceTarget(BlockState state) {
-        return state.isAir() || List.of(Blocks.FERN, Blocks.GRASS, Blocks.TALL_GRASS, Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.SNOW, Blocks.POPPY, Blocks.DANDELION).contains(state.getBlock());
+        return state.isAir() || Blocks.SNOW == state.getBlock();
     }
 }

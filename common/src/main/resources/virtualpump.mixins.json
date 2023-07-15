@@ -9,6 +9,7 @@
   "mixins": [
     "MixinChunkStatus",
     "MixinEnderDragonFight",
+    "MixinFernAndFlowerBlock",
     "MixinPortalForcer"
   ],
   "client": [
