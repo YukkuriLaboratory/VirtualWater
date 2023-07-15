@@ -2,6 +2,7 @@ package net.yukulab.virtualpump.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.state.property.Properties;
 import net.minecraft.world.Heightmap;
@@ -43,14 +44,16 @@ public abstract class MixinChunkStatus {
                                 chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
                             }
                             while (belowBlock.getBlock() instanceof Waterloggable) {
-                                chunk.setBlockState(below, belowBlock.with(Properties.WATERLOGGED, true), false);
+                                var isLeaves = belowBlock.getBlock() instanceof LeavesBlock;
+                                chunk.setBlockState(below, belowBlock.with(Properties.WATERLOGGED, !isLeaves), false);
                                 below = below.down();
                                 belowBlock = chunk.getBlockState(below);
                             }
                             var above = blockPos.up();
                             var aboveBlock = chunk.getBlockState(above);
-                            while (aboveBlock.getBlock() instanceof Waterloggable) {
-                                chunk.setBlockState(above, aboveBlock.with(Properties.WATERLOGGED, true), false);
+                            while (aboveBlock.getBlock() instanceof Waterloggable && !(belowBlock.getBlock() instanceof LeavesBlock)) {
+                                var isLeaves = belowBlock.getBlock() instanceof LeavesBlock;
+                                chunk.setBlockState(above, aboveBlock.with(Properties.WATERLOGGED, !isLeaves), false);
                                 above = above.up();
                                 aboveBlock = chunk.getBlockState(above);
                             }
