@@ -1,4 +1,4 @@
-package net.yukulab.virtualpump.mixin;
+package net.yukulab.virtualpump.mixin.end;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

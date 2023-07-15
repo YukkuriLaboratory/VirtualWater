@@ -8,10 +8,17 @@
   },
   "mixins": [
     "MixinChunkStatus",
-    "MixinEnderDragonFight",
     "MixinFernAndFlowerBlock",
     "MixinPortalForcer",
-    "MixinSpreadableBlock"
+    "MixinSpreadableBlock",
+    "end.MixinEnderDragonFight",
+    "end.dragon.AccessorEnderDragonFight",
+    "end.dragon.MixinDragonPhases",
+    "end.dragon.MixinEnderDragonEntity",
+    "end.dragon.MixinExplosiveProjectileEntity",
+    "end.dragon.MixinHoldingPatternPhase",
+    "end.dragon.MixinLandingApproachPhase",
+    "end.dragon.MixinSittingFlamingPhase"
   ],
   "client": [
     "client.MixinClientPlayerEntity"
