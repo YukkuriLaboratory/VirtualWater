@@ -10,7 +10,8 @@
     "MixinChunkStatus",
     "MixinEnderDragonFight",
     "MixinFernAndFlowerBlock",
-    "MixinPortalForcer"
+    "MixinPortalForcer",
+    "MixinSpreadableBlock"
   ],
   "client": [
     "client.MixinClientPlayerEntity"
