@@ -47,6 +47,13 @@ public abstract class MixinChunkStatus {
                                 below = below.down();
                                 belowBlock = chunk.getBlockState(below);
                             }
+                            var above = blockPos.up();
+                            var aboveBlock = chunk.getBlockState(above);
+                            while (aboveBlock.getBlock() instanceof Waterloggable) {
+                                chunk.setBlockState(above, aboveBlock.with(Properties.WATERLOGGED, true), false);
+                                above = above.up();
+                                aboveBlock = chunk.getBlockState(above);
+                            }
                         }
                     }
                 });
