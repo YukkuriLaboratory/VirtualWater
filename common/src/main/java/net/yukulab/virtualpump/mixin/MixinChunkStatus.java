@@ -36,8 +36,16 @@ public abstract class MixinChunkStatus {
                         chunk.setBlockState(blockPos, Blocks.WATER.getDefaultState(), false);
                         var below = blockPos.down();
                         var belowBlock = chunk.getBlockState(below);
-                        if (belowBlock != null && belowBlock.isOf(Blocks.LAVA)) {
-                            chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
+                        if (belowBlock != null) {
+                            if (belowBlock.isOf(Blocks.LAVA)) {
+                                chunk.setBlockState(below, Blocks.OBSIDIAN.getDefaultState(), false);
+                            }
+                            // Too laggy to play
+//                            while (belowBlock.getBlock() instanceof Waterloggable) {
+//                                chunk.setBlockState(below, belowBlock.with(Properties.WATERLOGGED, true), false);
+//                                below = below.down();
+//                                belowBlock = chunk.getBlockState(below);
+//                            }
                         }
                     }
                 });

@@ -8,7 +8,6 @@
   },
   "mixins": [
     "MixinChunkStatus",
-    "MixinFernAndFlowerBlock",
     "MixinPortalForcer",
     "MixinSpreadableBlock",
     "end.MixinEnderDragonFight",
@@ -18,7 +17,10 @@
     "end.dragon.MixinExplosiveProjectileEntity",
     "end.dragon.MixinHoldingPatternPhase",
     "end.dragon.MixinLandingApproachPhase",
-    "end.dragon.MixinSittingFlamingPhase"
+    "end.dragon.MixinSittingFlamingPhase",
+    "waterproof.MixinFernAndFlowerBlock",
+    "waterproof.MixinNonePropertyBlocks",
+    "waterproof.MixinPropertyInjectableBlock"
   ],
   "client": [
     "client.MixinClientPlayerEntity"

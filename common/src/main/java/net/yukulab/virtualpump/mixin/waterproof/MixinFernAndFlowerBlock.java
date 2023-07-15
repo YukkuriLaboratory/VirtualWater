@@ -1,10 +1,6 @@
-package net.yukulab.virtualpump.forge.mixin;
+package net.yukulab.virtualpump.mixin.waterproof;
 
-import com.pam.pamhc2crops.blocks.BlockPamCrop;
-import com.pam.pamhc2trees.blocks.BlockPamFruit;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
@@ -14,10 +10,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin({BlockPamFruit.class, BlockPamCrop.class})
-public abstract class MixinBlockPamFluitAndCrop extends Block implements Waterloggable {
-    public MixinBlockPamFluitAndCrop(Settings arg) {
-        super(arg);
+@Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, AbstractPlantStemBlock.class})
+public abstract class MixinFernAndFlowerBlock extends Block implements Waterloggable {
+    public MixinFernAndFlowerBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
