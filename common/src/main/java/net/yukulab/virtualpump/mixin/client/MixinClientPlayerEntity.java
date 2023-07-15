@@ -15,8 +15,6 @@ public class MixinClientPlayerEntity {
     )
     private void changeWaterVisibility(CallbackInfoReturnable<Float> cir) {
         var returnValue = cir.getReturnValue();
-        if (returnValue == 1.0F) {
-            cir.setReturnValue(2.0F);
-        }
+        cir.setReturnValue(returnValue * 2);
     }
 }
