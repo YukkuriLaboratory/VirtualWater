@@ -26,6 +26,15 @@ configurations {
     getByName("developmentForge").extendsFrom(common)
 }
 
+repositories {
+    maven {
+        url = uri("https://cursemaven.com")
+        content {
+            includeGroup("curse.maven")
+        }
+    }
+}
+
 val forge_version: String by rootProject
 val architectury_version: String by rootProject
 
@@ -37,6 +46,8 @@ dependencies {
         "shadowCommon",
         project(path = ":common", configuration = "transformProductionForge").apply { isTransitive = false },
     )
+//    modImplementation("curse.maven:pams-harvestcraft-2-crops-361385:4627015")
+//    modImplementation("curse.maven:pams-harvestcraft-2-trees-365460:4625518")
 }
 
 tasks {
