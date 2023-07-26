@@ -10,7 +10,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, AbstractPlantStemBlock.class, CaveVinesBodyBlock.class, AzaleaBlock.class})
+@Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, CaveVinesHeadBlock.class, TwistingVinesBlock.class, WeepingVinesBlock.class, CaveVinesBodyBlock.class, AzaleaBlock.class})
 public abstract class MixinFernAndFlowerBlock extends Block implements Waterloggable {
     public MixinFernAndFlowerBlock(Settings settings) {
         super(settings);
