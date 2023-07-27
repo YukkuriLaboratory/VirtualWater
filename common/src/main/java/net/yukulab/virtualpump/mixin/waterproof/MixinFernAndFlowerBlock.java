@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.List;
 
-@Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, SproutsBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, CaveVinesHeadBlock.class, TwistingVinesBlock.class, TwistingVinesPlantBlock.class, WeepingVinesBlock.class, WeepingVinesPlantBlock.class, CaveVinesBodyBlock.class, AzaleaBlock.class, SweetBerryBushBlock.class})
+@Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, SproutsBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, CaveVinesHeadBlock.class, TwistingVinesBlock.class, TwistingVinesPlantBlock.class, WeepingVinesBlock.class, WeepingVinesPlantBlock.class, CaveVinesBodyBlock.class, AzaleaBlock.class, SweetBerryBushBlock.class, ChorusFlowerBlock.class, ChorusPlantBlock.class, CactusBlock.class})
 public abstract class MixinFernAndFlowerBlock extends Block implements Waterloggable {
     public MixinFernAndFlowerBlock(Settings settings) {
         super(settings);
@@ -34,11 +34,16 @@ public abstract class MixinFernAndFlowerBlock extends Block implements Waterlogg
         if (state.get(Properties.WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        if (!state.canPlaceAt(world, pos) && List.of(Blocks.SUGAR_CANE,Blocks.BAMBOO).contains(state.getBlock())) {
+        if (!state.canPlaceAt(world, pos) && List.of(Blocks.BAMBOO, Blocks.CACTUS, Blocks.CHORUS_FLOWER, Blocks.CHORUS_PLANT,  Blocks.SUGAR_CANE).contains(state.getBlock())) {
             world.scheduleBlockTick(pos, this, 1);
         }
         if (direction == Direction.UP && neighborState.isOf(Blocks.BAMBOO) && neighborState.get(BambooBlock.AGE) > state.get(BambooBlock.AGE)) {
             world.setBlockState(pos, state.cycle(BambooBlock.AGE), Block.NOTIFY_LISTENERS);
+        }
+
+        if(state.getBlock() == Blocks.CHORUS_PLANT){
+            boolean bl = neighborState.isOf(this) || neighborState.isOf(Blocks.CHORUS_FLOWER) || direction == Direction.DOWN && neighborState.isOf(Blocks.END_STONE);
+            return state.with(ChorusPlantBlock.FACING_PROPERTIES.get(direction), bl);
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
