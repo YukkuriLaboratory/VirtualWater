@@ -10,6 +10,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 
+import java.util.List;
+
 @Mixin({FernBlock.class, TallPlantBlock.class, MushroomPlantBlock.class, SnowBlock.class, FlowerBlock.class, TallFlowerBlock.class, CocoaBlock.class, SugarCaneBlock.class, CarpetBlock.class, FungusBlock.class, VineBlock.class, BambooBlock.class, SaplingBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, NetherWartBlock.class, SproutsBlock.class, CropBlock.class, FlowerbedBlock.class, RootsBlock.class, CaveVinesHeadBlock.class, TwistingVinesBlock.class, TwistingVinesPlantBlock.class, WeepingVinesBlock.class, WeepingVinesPlantBlock.class, CaveVinesBodyBlock.class, AzaleaBlock.class, SweetBerryBushBlock.class})
 public abstract class MixinFernAndFlowerBlock extends Block implements Waterloggable {
     public MixinFernAndFlowerBlock(Settings settings) {
@@ -32,8 +34,11 @@ public abstract class MixinFernAndFlowerBlock extends Block implements Waterlogg
         if (state.get(Properties.WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        if (!state.canPlaceAt(world, pos) && state.isOf(Blocks.SUGAR_CANE)) {
+        if (!state.canPlaceAt(world, pos) && List.of(Blocks.SUGAR_CANE,Blocks.BAMBOO).contains(state.getBlock())) {
             world.scheduleBlockTick(pos, this, 1);
+        }
+        if (direction == Direction.UP && neighborState.isOf(Blocks.BAMBOO) && neighborState.get(BambooBlock.AGE) > state.get(BambooBlock.AGE)) {
+            world.setBlockState(pos, state.cycle(BambooBlock.AGE), Block.NOTIFY_LISTENERS);
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
