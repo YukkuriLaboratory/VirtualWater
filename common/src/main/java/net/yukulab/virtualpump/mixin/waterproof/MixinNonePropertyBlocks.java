@@ -5,7 +5,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin({FernBlock.class, MushroomPlantBlock.class, FlowerBlock.class, CarpetBlock.class, FungusBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, RootsBlock.class, AzaleaBlock.class})
+@Mixin({SproutsBlock.class, FernBlock.class, MushroomPlantBlock.class, FlowerBlock.class, CarpetBlock.class, FungusBlock.class, DeadBushBlock.class, CarpetBlock.class, LilyPadBlock.class, RootsBlock.class, AzaleaBlock.class, WeepingVinesPlantBlock.class, TwistingVinesPlantBlock.class})
 public abstract class MixinNonePropertyBlocks extends Block {
     public MixinNonePropertyBlocks(Settings settings) {
         super(settings);

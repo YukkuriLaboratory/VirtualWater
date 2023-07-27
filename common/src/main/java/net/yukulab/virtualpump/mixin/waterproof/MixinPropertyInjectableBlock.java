@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({SaplingBlock.class, TallPlantBlock.class, TorchflowerBlock.class, BeetrootsBlock.class, CropBlock.class, SnowBlock.class, SugarCaneBlock.class, VineBlock.class, NetherWartBlock.class, CocoaBlock.class, AbstractPlantStemBlock.class, BambooBlock.class, FlowerbedBlock.class, CaveVinesBodyBlock.class})
+@Mixin({SaplingBlock.class, TallPlantBlock.class, TorchflowerBlock.class, BeetrootsBlock.class, CropBlock.class, SnowBlock.class, SugarCaneBlock.class, VineBlock.class, NetherWartBlock.class, CocoaBlock.class, AbstractPlantStemBlock.class, BambooBlock.class, FlowerbedBlock.class, CaveVinesBodyBlock.class, SweetBerryBushBlock.class})
 public abstract class MixinPropertyInjectableBlock {
     @Inject(
             method = "appendProperties",

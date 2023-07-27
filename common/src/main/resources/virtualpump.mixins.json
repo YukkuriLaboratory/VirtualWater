@@ -20,7 +20,8 @@
     "end.dragon.MixinSittingFlamingPhase",
     "waterproof.MixinFernAndFlowerBlock",
     "waterproof.MixinNonePropertyBlocks",
-    "waterproof.MixinPropertyInjectableBlock"
+    "waterproof.MixinPropertyInjectableBlock",
+    "waterproof.MixinVineLogic"
   ],
   "client": [
     "client.MixinClientPlayerEntity"
