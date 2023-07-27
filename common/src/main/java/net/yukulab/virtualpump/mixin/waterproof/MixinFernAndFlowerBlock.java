@@ -32,6 +32,9 @@ public abstract class MixinFernAndFlowerBlock extends Block implements Waterlogg
         if (state.get(Properties.WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
+        if (!state.canPlaceAt(world, pos) && state.isOf(Blocks.SUGAR_CANE)) {
+            world.scheduleBlockTick(pos, this, 1);
+        }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
