@@ -24,7 +24,5 @@
     "waterproof.MixinVineLogic",
     "client.MixinBackgroundRenderer"
   ],
-  "client": [
-    "client.MixinClientPlayerEntity"
-  ]
+  "client": []
 }
