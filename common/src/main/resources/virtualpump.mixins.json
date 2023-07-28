@@ -23,7 +23,5 @@
     "waterproof.MixinPropertyInjectableBlock",
     "waterproof.MixinVineLogic"
   ],
-  "client": [
-    "client.MixinClientPlayerEntity"
-  ]
+  "client": []
 }
