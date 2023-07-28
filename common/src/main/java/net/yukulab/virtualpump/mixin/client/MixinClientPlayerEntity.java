@@ -17,6 +17,12 @@ public class MixinClientPlayerEntity {
 
     @Shadow @Final protected MinecraftClient client;
 
+    @Shadow
+    private int underwaterVisibilityTicks;
+    private float visibilityMultiply = 1;
+    private int lastChangedTick = underwaterVisibilityTicks;
+    private boolean isInCloserWaterFog = false;
+
     @Inject(
             method = "getUnderwaterVisibility",
             at = @At("RETURN"),
@@ -26,10 +32,19 @@ public class MixinClientPlayerEntity {
         var returnValue = cir.getReturnValue();
         var world = this.networkHandler.getWorld();
         var playerPos = this.client.player != null ? this.client.player.getBlockPos() : null;
-        if (world.getBiome(playerPos).isIn(BiomeTags.HAS_CLOSER_WATER_FOG)) {
-            cir.cancel();
+        if (playerPos != null && world.getBiome(playerPos).isIn(BiomeTags.HAS_CLOSER_WATER_FOG)) {
+            if (!isInCloserWaterFog) {
+                isInCloserWaterFog = true;
+                lastChangedTick = underwaterVisibilityTicks;
+            }
+            visibilityMultiply = Math.max(1, visibilityMultiply - (underwaterVisibilityTicks - lastChangedTick) * 0.012f);
         }else {
-            cir.setReturnValue(returnValue * 2);
+            if (isInCloserWaterFog) {
+                isInCloserWaterFog = false;
+                lastChangedTick = underwaterVisibilityTicks;
+            }
+            visibilityMultiply = Math.min(2, visibilityMultiply + (underwaterVisibilityTicks - lastChangedTick) * 0.012f);
         }
+        cir.setReturnValue(returnValue * visibilityMultiply);
     }
 }

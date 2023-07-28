@@ -24,5 +24,6 @@
     "waterproof.MixinVineLogic"
   ],
   "client": [
+    "client.MixinClientPlayerEntity"
   ]
 }
