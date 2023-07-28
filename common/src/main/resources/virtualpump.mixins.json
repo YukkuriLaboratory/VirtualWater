@@ -21,8 +21,8 @@
     "waterproof.MixinFernAndFlowerBlock",
     "waterproof.MixinNonePropertyBlocks",
     "waterproof.MixinPropertyInjectableBlock",
-    "waterproof.MixinVineLogic",
-    "client.MixinBackgroundRenderer"
+    "waterproof.MixinVineLogic"
   ],
-  "client": []
+  "client": [
+  ]
 }
