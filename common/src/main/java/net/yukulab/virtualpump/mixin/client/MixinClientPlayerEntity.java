@@ -4,7 +4,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.registry.tag.BiomeTags;
-import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,9 +19,6 @@ public class MixinClientPlayerEntity {
 
     @Shadow
     private int underwaterVisibilityTicks;
-    @Shadow
-    @Final
-    public static Logger LOGGER;
     private float visibilityMultiply = 1;
     private long lastChangedTick = underwaterVisibilityTicks;
     private boolean isInCloserWaterFog = false;
@@ -49,6 +45,10 @@ public class MixinClientPlayerEntity {
                 lastChangedTick = worldTime;
             }
             visibilityMultiply = Math.min(2, visibilityMultiply + (worldTime - lastChangedTick) * 0.000006f);
+        }
+        if (returnValue == 0) {
+            visibilityMultiply = 1;
+            lastChangedTick = worldTime;
         }
         cir.setReturnValue(returnValue * visibilityMultiply);
     }
