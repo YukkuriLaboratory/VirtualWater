@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.registry.tag.BiomeTags;
+import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,8 +20,11 @@ public class MixinClientPlayerEntity {
 
     @Shadow
     private int underwaterVisibilityTicks;
+    @Shadow
+    @Final
+    public static Logger LOGGER;
     private float visibilityMultiply = 1;
-    private int lastChangedTick = underwaterVisibilityTicks;
+    private long lastChangedTick = underwaterVisibilityTicks;
     private boolean isInCloserWaterFog = false;
 
     @Inject(
@@ -32,18 +36,19 @@ public class MixinClientPlayerEntity {
         var returnValue = cir.getReturnValue();
         var world = this.networkHandler.getWorld();
         var playerPos = this.client.player != null ? this.client.player.getBlockPos() : null;
+        var worldTime = world.getTime();
         if (playerPos != null && world.getBiome(playerPos).isIn(BiomeTags.HAS_CLOSER_WATER_FOG)) {
             if (!isInCloserWaterFog) {
                 isInCloserWaterFog = true;
-                lastChangedTick = underwaterVisibilityTicks;
+                lastChangedTick = worldTime;
             }
-            visibilityMultiply = Math.max(1, visibilityMultiply - (underwaterVisibilityTicks - lastChangedTick) * 0.012f);
+            visibilityMultiply = Math.max(1, visibilityMultiply - (worldTime - lastChangedTick) * 0.000006f);
         }else {
             if (isInCloserWaterFog) {
                 isInCloserWaterFog = false;
-                lastChangedTick = underwaterVisibilityTicks;
+                lastChangedTick = worldTime;
             }
-            visibilityMultiply = Math.min(2, visibilityMultiply + (underwaterVisibilityTicks - lastChangedTick) * 0.012f);
+            visibilityMultiply = Math.min(2, visibilityMultiply + (worldTime - lastChangedTick) * 0.000006f);
         }
         cir.setReturnValue(returnValue * visibilityMultiply);
     }
