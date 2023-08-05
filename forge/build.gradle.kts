@@ -40,7 +40,7 @@ val architectury_version: String by rootProject
 
 dependencies {
     add("forge", "net.minecraftforge:forge:$forge_version")
-//    modApi("dev.architectury:architectury-forge:$architectury_version")
+    modApi("dev.architectury:architectury-forge:$architectury_version")
     add("common", project(path = ":common", configuration = "namedElements").apply { isTransitive = false })
     add(
         "shadowCommon",
