@@ -5,7 +5,7 @@ plugins {
 }
 
 val archives_base_name: String by rootProject
-val mod_version = System.getenv("MOD_VERSION") ?: "develop"
+val mod_version = System.getenv("MOD_VERSION") ?: "0.1-dev"
 val maven_group: String by rootProject
 
 val minecraft_version: String by rootProject
