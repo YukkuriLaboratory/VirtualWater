@@ -46,8 +46,6 @@ dependencies {
         "shadowCommon",
         project(path = ":common", configuration = "transformProductionForge").apply { isTransitive = false },
     )
-    modImplementation("curse.maven:pams-harvestcraft-2-crops-361385:4627015")
-    modImplementation("curse.maven:pams-harvestcraft-2-trees-365460:4625518")
 }
 
 tasks {
