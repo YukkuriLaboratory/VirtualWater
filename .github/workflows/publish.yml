@@ -1,0 +1,52 @@
+name: Publish on GitHub, CurseForge & Modrinth
+
+on:
+  push:
+    tags:
+      - "v*"
+
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        loaders: [ fabric, forge ]
+    steps:
+      - name: Check environment variables
+        run: env
+      - uses: actions/checkout@v3
+      - name: get release tag
+        id: tag
+        uses: olegtarasov/get-tag@v2.1.2
+        with:
+          tagRegex: "v(.*)"
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+        env:
+          MOD_VERSION: ${{ steps.tag.outputs.tag }}
+
+      - uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          curseforge-id: ${{ secrets.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          modrinth-id: ${{ secrets.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          version: ${{ steps.tag.outputs.tag }}
+          version-type: release
+          java: 17
+          loaders: ${{ matrix.loaders }}
+          game-versions: 1.20.1
+          files: ${{ matrix.loaders }}/build/libs/VirtualPump-*.jar
