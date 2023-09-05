@@ -5,15 +5,13 @@
   "name": "VirtualPump",
   "description": "",
   "authors": [],
+  "icon": "VirtualPump_icon.png",
   "contact": {
     "repo": "https://github.com/YukkuriLaboratory/VirtualPump"
   },
   "license": "MIT",
   "environment": "*",
   "entrypoints": {},
-  "mixins": [
-    "virtualpump.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "minecraft": "${minecraft_version}"
