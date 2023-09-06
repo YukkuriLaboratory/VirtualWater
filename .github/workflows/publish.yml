@@ -49,4 +49,4 @@ jobs:
           java: 17
           loaders: ${{ matrix.loaders }}
           game-versions: 1.20.1
-          files: ${{ matrix.loaders }}/build/libs/VirtualPump-*.jar
+          files: ${{ matrix.loaders }}/build/libs/VirtualPump-${{ steps.tag.outputs.tag }}.jar
