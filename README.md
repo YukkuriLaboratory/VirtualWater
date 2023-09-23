@@ -7,6 +7,10 @@
 > - 海底の明るさは常に0に等しいため、暗視効果の付与や[同等の効果を得るリソースパック](https://modrinth.com/resourcepack/fullbright-ub)の導入をお勧めします。
 > - ネザーの岩盤上は軽量化のために完全な水没にはなりません。
 
+↓↓紹介動画はこちら↓↓
+
+[![動画](http://img.youtube.com/vi/1N9_36BgHZk/0.jpg)](https://www.youtube.com/shorts/1N9_36BgHZk)
+
 本MODはしう氏の2023年夏企画、「水没世界でお料理生活」のために制作されました。
 
 ↓↓本編はこちら↓↓
